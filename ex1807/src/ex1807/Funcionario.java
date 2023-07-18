@@ -8,6 +8,15 @@ package ex1807;
  *
  * @author aluno
  */
-public class Funcionario {
+public abstract class Funcionario {
+    private double salario;
+
+    public Funcionario(double salario) {
+        this.salario = salario;
+    }
     
+    @Override
+    public String toString() {
+        return "Salario: " + this.salario;
+    }
 }

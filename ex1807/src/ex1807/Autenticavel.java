@@ -8,6 +8,6 @@ package ex1807;
  *
  * @author aluno
  */
-public class Autenticavel {
-    
+public interface Autenticavel {
+    boolean autenticar(int senha);
 }

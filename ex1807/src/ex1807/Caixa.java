@@ -8,6 +8,30 @@ package ex1807;
  *
  * @author aluno
  */
-public class Caixa {
+public class Caixa extends Funcionario {
+
+    public Caixa(double salario) {
+        super(salario);
+    }
     
+    public void inserirItem(int item) {
+        
+    }
+    
+    public void removerItem(int item) {
+        
+    }
+    
+    public void solicitarPagamento() {
+        
+    }
+    
+    public void encerrarConta() {
+        
+    }
+    
+    @Override
+    public String toString() {
+        return "Caixa -> " + super.toString();
+    }
 }
