@@ -10,23 +10,51 @@ package LembretesApp;
  */
 public class Lembrete implements Comparable<Lembrete> {
     private String descricao;
-    // Deverá ser expandido para uma data completa
-    // utilizar a classe Data do cadastro de pessoas
-    private int dia; 
+    private Data data; 
     
-    public Lembrete(String descricao, int dia) {
+    public Lembrete(String descricao, Data data) {
         this.descricao = descricao;
-        this.dia = dia;
+        this.data = data;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public Data getData() {
+        return data;
     }
     
     @Override
     public String toString() {
-        return dia + "Descrição: " + descricao + "\n";
+        return data.getDia() + "/" + data.getMes() + "/" + data.getAno() + " Descricao: " + descricao + "\n";
     }
     
     @Override
     public int compareTo(Lembrete l) {
-        //return this.descricao.compareTo(l.descricao);
-        return this.dia - l.dia;
+        if (this.data.getAno() != l.data.getAno()) {
+        return Integer.compare(this.data.getAno(), l.data.getAno());
+    } else if (this.data.getMes() != l.data.getMes()) {
+        return Integer.compare(this.data.getMes(), l.data.getMes());
+    } else if (this.data.getDia() != l.data.getDia()) {
+        return Integer.compare(this.data.getDia(), l.data.getDia());
+    }
+        
+//        int compareYear = this.data.getAno() - l.data.getAno();
+//        if (compareYear != 0) {
+//            return compareYear;
+//        }
+//        
+//        int compareMonth = this.data.getMes() - l.data.getMes();
+//        if (compareMonth != 0) {
+//            return compareYear;
+//        }
+//        
+//        int compareDay = this.data.getDia() - l.data.getDia();
+//        if (compareDay != 0) {
+//            return compareDay;
+//        }
+        
+        return this.descricao.compareTo(l.descricao);
     }
 }

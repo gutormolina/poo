@@ -27,8 +27,41 @@ public class BlocoDeLembretes {
         return lista.remove(posicao);
     }
     
-    public Lembrete buscar(int posicao) { // pode usar lista.contains para checar
-        return lista.get(posicao); // se o objeto passado está na lista
+    public List<Lembrete> buscar(String substring) {
+        List<Lembrete> lembretesEncontrados = new LinkedList<>();
+        
+        for (Lembrete lembrete : lista) {
+            if (lembrete.getDescricao().contains(substring)) {
+                lembretesEncontrados.add(lembrete);
+            }
+        }
+        
+        return lembretesEncontrados;
+    }
+    
+    public List<Lembrete> buscar(int mes, int ano) {
+        List<Lembrete> lembretesEncontrados = new LinkedList<>();
+        
+        for (Lembrete lembrete : lista) {
+            if (lembrete.getData().getAno() == ano &&
+                lembrete.getData().getMes() == mes) {
+                lembretesEncontrados.add(lembrete);
+            }
+        }
+        
+        return lembretesEncontrados;
+    }
+    
+    public List<Lembrete> buscar(Data data) {
+        List<Lembrete> lembretesEncontrados = new LinkedList<>();
+        
+        for (Lembrete lembrete : lista) {
+            if (lembrete.getData().equals(data)) {
+                lembretesEncontrados.add(lembrete);
+            }
+        }
+        
+        return lembretesEncontrados;
     }
     
     public void ordenar() {
