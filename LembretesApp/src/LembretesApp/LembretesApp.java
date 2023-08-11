@@ -44,13 +44,13 @@ public class LembretesApp {
                     System.out.println("Insira o indice: ");
                     int i = sc.nextInt();
                     sc.nextLine();
-                    bloco.remover(i);
+                    System.out.println("Removido: " + bloco.remover(i));
                     break;
                     
                 case 3: // Precisa poder retornar mais de um lembrete
                     System.out.println("Insira a substring: ");
                     String s = sc.nextLine();
-                    bloco.buscar(s);
+                    System.out.println(bloco.buscar(s));
                     break;
                     
                 case 4: // Precisa poder retornar mais de um lembrete
@@ -59,7 +59,7 @@ public class LembretesApp {
                     System.out.println("Insira o ano: ");
                     ano = sc.nextInt();
                     sc.nextLine();
-                    bloco.buscar(mes, ano);
+                    System.out.println(bloco.buscar(mes, ano));
                     break;
                     
                 case 5: // Precisa poder retornar mais de um lembrete
@@ -71,8 +71,7 @@ public class LembretesApp {
                     ano = sc.nextInt();
                     sc.nextLine();
                     data = new Data(dia, mes, ano);
-                    bloco.buscar(data);
-                    break;
+                    System.out.println(bloco.buscar(data));
                     
                 case 6:
                     bloco.ordenar();

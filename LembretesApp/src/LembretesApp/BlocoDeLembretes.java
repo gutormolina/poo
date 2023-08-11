@@ -56,7 +56,9 @@ public class BlocoDeLembretes {
         List<Lembrete> lembretesEncontrados = new LinkedList<>();
         
         for (Lembrete lembrete : lista) {
-            if (lembrete.getData().equals(data)) {
+            if (lembrete.getData().getAno() == data.getAno() &&
+                lembrete.getData().getMes() == data.getMes() &&
+                lembrete.getData().getDia() == data.getDia()) {
                 lembretesEncontrados.add(lembrete);
             }
         }

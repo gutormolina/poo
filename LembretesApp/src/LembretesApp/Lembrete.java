@@ -33,27 +33,14 @@ public class Lembrete implements Comparable<Lembrete> {
     @Override
     public int compareTo(Lembrete l) {
         if (this.data.getAno() != l.data.getAno()) {
-        return Integer.compare(this.data.getAno(), l.data.getAno());
-    } else if (this.data.getMes() != l.data.getMes()) {
-        return Integer.compare(this.data.getMes(), l.data.getMes());
-    } else if (this.data.getDia() != l.data.getDia()) {
-        return Integer.compare(this.data.getDia(), l.data.getDia());
-    }
+            return Integer.compare(this.data.getAno(), l.data.getAno());
         
-//        int compareYear = this.data.getAno() - l.data.getAno();
-//        if (compareYear != 0) {
-//            return compareYear;
-//        }
-//        
-//        int compareMonth = this.data.getMes() - l.data.getMes();
-//        if (compareMonth != 0) {
-//            return compareYear;
-//        }
-//        
-//        int compareDay = this.data.getDia() - l.data.getDia();
-//        if (compareDay != 0) {
-//            return compareDay;
-//        }
+        } else if (this.data.getMes() != l.data.getMes()) {
+            return Integer.compare(this.data.getMes(), l.data.getMes());
+        
+        } else if (this.data.getDia() != l.data.getDia()) {
+            return Integer.compare(this.data.getDia(), l.data.getDia());
+        }
         
         return this.descricao.compareTo(l.descricao);
     }
