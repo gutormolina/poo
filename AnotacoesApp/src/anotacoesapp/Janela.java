@@ -18,9 +18,12 @@ import javax.swing.JPanel;
  * @author augus
  */
 public class Janela extends JFrame implements ActionListener{
+   
     private JPanel painel1, painel2, painel3;
     private JButton novaAnot, ordData, ordTitulo, pagAnt, pagProx;
     private JLabel pags;
+    private BlocoDeAnotacoes bloco;
+    
     
     public Janela() {
         setSize(1024, 720);
@@ -59,7 +62,7 @@ public class Janela extends JFrame implements ActionListener{
         
         
         // -- Definição do Painel 3 --------------
-        painel3.setLayout(new FlowLayout(2));
+        painel3.setLayout(new FlowLayout());
         pagAnt = new JButton("Página Anterior");
         pags = new JLabel("Página 1");
         pagProx = new JButton("Próxima Página");
@@ -73,7 +76,23 @@ public class Janela extends JFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == novaAnot) {
-            NovaAnotacao novaAnotacao = new NovaAnotacao();
+            NovaAnotacao novaAnotacao = new NovaAnotacao(bloco);
+        }
+        
+        if (e.getSource() == ordData) {
+            bloco.ordenarData();
+        }
+        
+        if (e.getSource() == ordTitulo) {
+            bloco.ordenarTitulo();
+        }
+        
+        if (e.getSource() == pagAnt) {
+            
+        }
+        
+        if (e.getSource() == pagProx) {
+            
         }
     }
 }

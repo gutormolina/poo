@@ -4,8 +4,6 @@
  */
 package anotacoesapp;
 
-import java.awt.EventQueue;
-
 /**
  *
  * @author augus
@@ -16,7 +14,7 @@ public class AnotacoesApp {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Janela janela = new Janela();
+        Janela janela = new Janela(); 
         
     }
     

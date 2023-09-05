@@ -27,7 +27,12 @@ public class BlocoDeAnotacoes {
         lista.remove(a);
     }
     
+    
     public void ordenarTitulo() {
         Collections.sort(lista);
+    }
+    
+    public void ordenarData() {
+        Collections.sort(lista, new CompararData());
     }
 }
