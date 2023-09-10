@@ -4,14 +4,23 @@
  */
 package anotacoesapp;
 
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 
 /**
  *
@@ -19,19 +28,62 @@ import javax.swing.JPanel;
  */
 public class Janela extends JFrame implements ActionListener{
    
-    private JPanel painel1, painel2, painel3;
-    private JButton novaAnot, ordData, ordTitulo, pagAnt, pagProx;
+    private JPanel painel1, painel2, painel3, painelAnot;
+    private JButton novaAnot, ordData, ordTitulo, verAnot, remAnot, pagAnt, pagProx;
     private JLabel pags;
     private BlocoDeAnotacoes bloco;
-    
+    private boolean novaAnotAberta = false;
+    private Border blackline;
+    private List<JButton> verAnotBotoes, remAnotBotoes;
     
     public Janela() {
         setSize(1024, 720);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setTitle("AnotacoesApp");
         setLocationRelativeTo(null);
+        this.bloco = new BlocoDeAnotacoes();
+        verAnotBotoes = new ArrayList<>();
+        remAnotBotoes = new ArrayList<>();
         criaJanela();
         setVisible(true);
+        blackline = BorderFactory.createLineBorder(Color.gray);
+        atualizaAnot();
+    }
+
+    public void setNovaAnotAberta(boolean novaAnotAberta) {
+        this.novaAnotAberta = novaAnotAberta;
+    }
+    
+    public void atualizaAnot() {
+        verAnotBotoes.clear();
+        remAnotBotoes.clear();    
+        
+        painel2.removeAll();
+        
+        painel2.setLayout(new BoxLayout(painel2, BoxLayout.Y_AXIS));
+        for (Anotacao anotacao : this.bloco.getLista()) {
+            painelAnot = new JPanel();
+            painelAnot.setLayout(new FlowLayout());
+            painel2.add(painelAnot);
+            
+            verAnot = new JButton(anotacao.getTitulo());
+            verAnot.setPreferredSize(new Dimension(900, 50));
+            verAnot.addActionListener(this);
+            
+            
+            remAnot = new JButton("X");
+            remAnot.setPreferredSize(new Dimension(50,50));
+            remAnot.addActionListener(this);
+            
+            verAnotBotoes.add(verAnot);
+            remAnotBotoes.add(remAnot);
+            painelAnot.add(verAnot);
+            painelAnot.add(remAnot);
+        }
+        
+        painel2.setBorder(blackline);
+        painel2.revalidate();
+        painel2.repaint();
     }
     
     public void criaJanela() {
@@ -58,8 +110,7 @@ public class Janela extends JFrame implements ActionListener{
         painel1.add(ordTitulo);
         
         // -- Definição do Painel 2 --------------
-        painel2.setLayout(new GridLayout(6,2));
-        
+        atualizaAnot();
         
         // -- Definição do Painel 3 --------------
         painel3.setLayout(new FlowLayout());
@@ -75,16 +126,26 @@ public class Janela extends JFrame implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == novaAnot) {
-            NovaAnotacao novaAnotacao = new NovaAnotacao(bloco);
+        if (e.getSource() == novaAnot & !novaAnotAberta) {
+            NovaAnotacao novaAnotacao = new NovaAnotacao(bloco, this);
+            novaAnotAberta = true;
+            novaAnotacao.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    if (e.getSource() == novaAnotacao);
+                    novaAnotAberta = false;
+                }
+            });
         }
         
         if (e.getSource() == ordData) {
             bloco.ordenarData();
+            atualizaAnot();
         }
         
         if (e.getSource() == ordTitulo) {
             bloco.ordenarTitulo();
+            atualizaAnot();
         }
         
         if (e.getSource() == pagAnt) {
@@ -93,6 +154,20 @@ public class Janela extends JFrame implements ActionListener{
         
         if (e.getSource() == pagProx) {
             
+        }
+        
+        if (e.getSource() == verAnot) {
+            int index = verAnotBotoes.indexOf(e.getSource());
+            Anotacao anotacao = this.bloco.getLista().get(index);
+            VerAnotacao verAnotacao = new VerAnotacao(anotacao, bloco, this);
+        }
+        
+        if (e.getSource() == remAnot) {
+            int index = remAnotBotoes.indexOf(e.getSource());
+            Anotacao anotacao = this.bloco.getLista().get(index);
+            bloco.remover(anotacao);
+            verAnotBotoes.remove(index);
+            atualizaAnot();
         }
     }
 }

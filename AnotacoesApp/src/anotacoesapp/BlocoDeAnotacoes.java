@@ -19,6 +19,10 @@ public class BlocoDeAnotacoes {
         lista = new LinkedList();
     }
     
+    public List<Anotacao> getLista() {
+        return this.lista;
+}
+    
     public void inserir(Anotacao a) {
         lista.add(a);
     }
@@ -26,7 +30,6 @@ public class BlocoDeAnotacoes {
     public void remover(Anotacao a) {
         lista.remove(a);
     }
-    
     
     public void ordenarTitulo() {
         Collections.sort(lista);
