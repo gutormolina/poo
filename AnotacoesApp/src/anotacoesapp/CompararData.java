@@ -26,6 +26,10 @@ public class CompararData implements Comparator<Anotacao> {
             return Integer.compare(o1.getData().getDia(), o2.getData().getDia());
         }
         
+        if (o1.getData().getTempo() != o2.getData().getTempo()) {
+            return Long.compare(o1.getData().getTempo(), o2.getData().getTempo());
+        }
+        
         return o1.getTitulo().compareTo(o2.getTitulo());
     }
 }

@@ -50,7 +50,7 @@ public class Anotacao implements Comparable<Anotacao> {
     
     @Override
     public int compareTo(Anotacao a) {
-        if (this.titulo != a.titulo) {
+        if (!this.titulo.equals(a.titulo)) {
             return this.titulo.compareTo(a.titulo);
         }
             

@@ -12,11 +12,13 @@ public class Data {
     private int dia;
     private int mes;
     private int ano;
+    private long tempo;
 
-    public Data(int dia, int mes, int ano) {
+    public Data(int dia, int mes, int ano, long tempo) {
         this.dia = dia;
         this.mes = mes;
         this.ano = ano;
+        this.tempo = tempo;
     }
 
     public int getDia() {
@@ -29,5 +31,9 @@ public class Data {
 
     public int getAno() {
         return ano;
+    }
+    
+    public long getTempo() {
+        return tempo;
     }
 }

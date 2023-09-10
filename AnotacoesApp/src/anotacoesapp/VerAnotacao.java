@@ -43,7 +43,6 @@ public class VerAnotacao extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
         criaJanela();
         setVisible(true);
-        
     }
     
     public void criaJanela() {

@@ -91,8 +91,9 @@ public class NovaAnotacao extends JFrame implements ActionListener{
             int a = rightNow.get(Calendar.YEAR);
             int m = rightNow.get(Calendar.MONTH) + 1;
             int d = rightNow.get(Calendar.DAY_OF_MONTH);
+            long t = System.currentTimeMillis(); 
             
-            Data data = new Data(d, m, a);
+            Data data = new Data(d, m, a, t);
             Anotacao anotacao = new Anotacao(titulo.getText(), descricao.getText(), data);
             
             bloco.inserir(anotacao);

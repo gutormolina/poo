@@ -116,8 +116,6 @@ public class Janela extends JFrame implements ActionListener{
         painel1.add(ordData);
         painel1.add(ordTitulo);
         
-        // -- Definição do Painel 2 --------------
-        
         // -- Definição do Painel 3 --------------
         painel3.setLayout(new FlowLayout());
         pagAnt = new JButton("Página Anterior");
@@ -129,6 +127,7 @@ public class Janela extends JFrame implements ActionListener{
         painel3.add(pags);
         painel3.add(pagProx);
         
+        // -- Definição do Painel 2 --------------
         atualizaAnot();
     }
 
@@ -172,17 +171,21 @@ public class Janela extends JFrame implements ActionListener{
         }
         
         if (e.getSource() == verAnot) {
-            int index = verAnotBotoes.indexOf(e.getSource());
-            Anotacao anotacao = this.bloco.getLista().get(index);
-            VerAnotacao verAnotacao = new VerAnotacao(anotacao, bloco, this);
+            int index = verAnotBotoes.indexOf(e.getSource()) + (paginaAtual - 1) * maxAnots;
+            if (index >= 0 && index < bloco.getLista().size()) {
+                Anotacao anotacao = this.bloco.getLista().get(index);
+                VerAnotacao verAnotacao = new VerAnotacao(anotacao, bloco, this);
+            }
         }
         
         if (e.getSource() == remAnot) {
-            int index = remAnotBotoes.indexOf(e.getSource());
-            Anotacao anotacao = this.bloco.getLista().get(index);
-            bloco.remover(anotacao);
-            verAnotBotoes.remove(index);
-            atualizaAnot();
+            int index = remAnotBotoes.indexOf(e.getSource()) + (paginaAtual - 1) * maxAnots;
+            if (index >= 0 && index < bloco.getLista().size()) {
+                Anotacao anotacao = this.bloco.getLista().get(index);
+                bloco.remover(anotacao);
+                verAnotBotoes.remove(index);
+                atualizaAnot();
+            }
         }
     }
 }
