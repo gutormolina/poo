@@ -4,6 +4,7 @@
  */
 package anotacoesapp;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -35,10 +36,11 @@ public class Janela extends JFrame implements ActionListener{
     private boolean novaAnotAberta = false;
     private Border blackline;
     private List<JButton> verAnotBotoes, remAnotBotoes;
-    private int paginaAtual = 1, maxAnots = 4;
+    private int paginaAtual = 1, maxAnots = 9;
     
     public Janela() {
-        setSize(1024, 720);
+        setSize(590, 700);
+        setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setTitle("AnotacoesApp");
         setLocationRelativeTo(null);
@@ -61,7 +63,7 @@ public class Janela extends JFrame implements ActionListener{
         
         painel2.removeAll();
         
-        painel2.setLayout(new BoxLayout(painel2, BoxLayout.Y_AXIS));
+        painel2.setLayout(new FlowLayout());
         
         int inicio = (paginaAtual - 1) * maxAnots;
         int fim = Math.min(inicio + maxAnots, bloco.getLista().size());
@@ -73,7 +75,7 @@ public class Janela extends JFrame implements ActionListener{
             painel2.add(painelAnot);
             
             verAnot = new JButton(anotacao.getTitulo());
-            verAnot.setPreferredSize(new Dimension(900, 50));
+            verAnot.setPreferredSize(new Dimension(500, 50));
             verAnot.addActionListener(this);
             
             
@@ -94,15 +96,15 @@ public class Janela extends JFrame implements ActionListener{
     }
     
     public void criaJanela() {
-        setLayout(new GridLayout(3, 1));
+        setLayout(new BorderLayout());
         
         painel1 = new JPanel();
         painel2 = new JPanel();
         painel3 = new JPanel();
         
-        add(painel1);
+        add(painel1, BorderLayout.NORTH);
         add(painel2);
-        add(painel3);
+        add(painel3, BorderLayout.SOUTH);
         
         // -- Definição do Painel 1 --------------
         painel1.setLayout(new FlowLayout());

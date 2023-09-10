@@ -5,6 +5,7 @@
 package anotacoesapp;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -32,7 +33,8 @@ public class NovaAnotacao extends JFrame implements ActionListener{
     private Janela janela;
     
     public NovaAnotacao(BlocoDeAnotacoes bloco, Janela janela) {
-        setSize(600, 400);
+        setSize(450, 500);
+        setResizable(false);
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         setTitle("Nova Anotação");
         setLocationRelativeTo(null);
@@ -50,19 +52,20 @@ public class NovaAnotacao extends JFrame implements ActionListener{
     }
     
     public void criaJanela() {
-        setLayout(new GridLayout(3,1));
+        setLayout(new BorderLayout(0, 10));
         
         painel1 = new JPanel();
         painel2 = new JPanel();
         painel3 = new JPanel();
         
-        add(painel1);
+        add(painel1, BorderLayout.NORTH);
         add(painel2);
-        add(painel3);
+        add(painel3, BorderLayout.SOUTH);
         
         // -- Definição do Painel 1 --------------
         painel1.setLayout(new FlowLayout());
         titulo = new JTextField();
+        titulo.setPreferredSize(new Dimension (200, 30));
         titulo.setEditable(true);
         painel1.add(titulo);
         titulo.setText("Novo Título");

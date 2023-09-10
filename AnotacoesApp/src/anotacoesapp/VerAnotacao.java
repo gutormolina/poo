@@ -5,10 +5,12 @@
 package anotacoesapp;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -22,7 +24,7 @@ import javax.swing.JTextField;
  * @author augus
  */
 public class VerAnotacao extends JFrame implements ActionListener {
-    private JPanel painel1, painel2, painel3, painel4;
+    private JPanel painel1, painel2, painel3, texto;
     private JLabel dataDeCriacao;
     private JTextField titulo;
     private JTextArea descricao;
@@ -33,7 +35,8 @@ public class VerAnotacao extends JFrame implements ActionListener {
     private Data data;
     
     public VerAnotacao(Anotacao anotacao, BlocoDeAnotacoes bloco, Janela janela) {
-        setSize(600, 400);
+        setSize(450, 500);
+        setResizable(false);
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         this.anotacao = anotacao;
         this.bloco = bloco;
@@ -46,17 +49,15 @@ public class VerAnotacao extends JFrame implements ActionListener {
     }
     
     public void criaJanela() {
-        setLayout(new GridLayout(4, 1));
+        setLayout(new BorderLayout(0, 10));
         
         painel1 = new JPanel();
         painel2 = new JPanel();
         painel3 = new JPanel();
-        painel4 = new JPanel();
         
-        add(painel1);
+        add(painel1, BorderLayout.NORTH);
         add(painel2);
-        add(painel3);
-        add(painel4);
+        add(painel3, BorderLayout.SOUTH);
         
         // -- Definição do Painel 1 --------------
         dataDeCriacao = new JLabel();
@@ -64,28 +65,31 @@ public class VerAnotacao extends JFrame implements ActionListener {
         dataDeCriacao.setText(data.getDia() + "/" + data.getMes() + "/" + data.getAno());
 
         // -- Definição do Painel 2 --------------
-        painel2.setLayout(new FlowLayout());
+        
+        texto = new JPanel();
+        painel2.setLayout(new BorderLayout(0, 10));
+        painel2.add(texto);
+        texto.setLayout(new FlowLayout(FlowLayout.CENTER, 100, 30));
         titulo = new JTextField();
+        titulo.setPreferredSize(new Dimension (200, 30));
         titulo.setEditable(true);
-        painel2.add(titulo);
+        texto.add(titulo);
         titulo.setText(anotacao.getTitulo());
-
-        // -- Definição do Painel 3 --------------
-        painel3.setLayout(new BorderLayout());
         descricao = new JTextArea();
         descricao.setEditable(true);
-        painel3.add(new JScrollPane(descricao), BorderLayout.CENTER);
         descricao.setLineWrap(true);
+        descricao.setPreferredSize(new Dimension(410, 250));
+        texto.add(new JScrollPane(descricao), BorderLayout.CENTER);
         descricao.setText(anotacao.getDescricao());
 
-        // -- Definição do Painel 4 --------------
-        painel4.setLayout(new FlowLayout());
+        // -- Definição do Painel 3 --------------
+        painel3.setLayout(new FlowLayout());
         salvar = new JButton("Salvar");
         cancelar = new JButton("Cancelar");
         salvar.addActionListener(this);
         cancelar.addActionListener(this);
-        painel4.add(salvar);
-        painel4.add(cancelar);
+        painel3.add(salvar);
+        painel3.add(cancelar);
     }
 
     @Override
