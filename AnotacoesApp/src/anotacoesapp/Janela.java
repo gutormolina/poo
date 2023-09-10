@@ -35,6 +35,7 @@ public class Janela extends JFrame implements ActionListener{
     private boolean novaAnotAberta = false;
     private Border blackline;
     private List<JButton> verAnotBotoes, remAnotBotoes;
+    private int paginaAtual = 1, maxAnots = 4;
     
     public Janela() {
         setSize(1024, 720);
@@ -61,7 +62,12 @@ public class Janela extends JFrame implements ActionListener{
         painel2.removeAll();
         
         painel2.setLayout(new BoxLayout(painel2, BoxLayout.Y_AXIS));
-        for (Anotacao anotacao : this.bloco.getLista()) {
+        
+        int inicio = (paginaAtual - 1) * maxAnots;
+        int fim = Math.min(inicio + maxAnots, bloco.getLista().size());
+        
+        for (int i = inicio; i < fim; i++) {
+            Anotacao anotacao = this.bloco.getLista().get(i);
             painelAnot = new JPanel();
             painelAnot.setLayout(new FlowLayout());
             painel2.add(painelAnot);
@@ -81,6 +87,7 @@ public class Janela extends JFrame implements ActionListener{
             painelAnot.add(remAnot);
         }
         
+        pags.setText("Página " + paginaAtual);
         painel2.setBorder(blackline);
         painel2.revalidate();
         painel2.repaint();
@@ -110,18 +117,19 @@ public class Janela extends JFrame implements ActionListener{
         painel1.add(ordTitulo);
         
         // -- Definição do Painel 2 --------------
-        atualizaAnot();
         
         // -- Definição do Painel 3 --------------
         painel3.setLayout(new FlowLayout());
         pagAnt = new JButton("Página Anterior");
-        pags = new JLabel("Página 1");
+        pags = new JLabel();
         pagProx = new JButton("Próxima Página");
         pagAnt.addActionListener(this);
         pagProx.addActionListener(this);
         painel3.add(pagAnt);
         painel3.add(pags);
         painel3.add(pagProx);
+        
+        atualizaAnot();
     }
 
     @Override
@@ -149,11 +157,18 @@ public class Janela extends JFrame implements ActionListener{
         }
         
         if (e.getSource() == pagAnt) {
-            
+            if (paginaAtual > 1) {
+                paginaAtual--;
+                atualizaAnot();
+            }
         }
         
         if (e.getSource() == pagProx) {
-            
+            int totalPaginas = (int) Math.ceil((double) bloco.getLista().size() / maxAnots);
+            if (paginaAtual < totalPaginas) {
+                paginaAtual++;
+                atualizaAnot();
+            }
         }
         
         if (e.getSource() == verAnot) {
