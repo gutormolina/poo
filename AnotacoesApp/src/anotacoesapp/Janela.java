@@ -8,7 +8,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -16,7 +15,6 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -171,22 +169,25 @@ public class Janela extends JFrame implements ActionListener{
                 atualizaAnot();
             }
         }
-        
-        if (e.getSource() == verAnot) {
-            int index = verAnotBotoes.indexOf(e.getSource()) + (paginaAtual - 1) * maxAnots;
-            if (index >= 0 && index < bloco.getLista().size()) {
-                Anotacao anotacao = this.bloco.getLista().get(index);
-                VerAnotacao verAnotacao = new VerAnotacao(anotacao, bloco, this);
+        for (int i = 0; i < verAnotBotoes.size(); i++) {
+            if (e.getSource() == verAnotBotoes.get(i)) {
+                int index = verAnotBotoes.indexOf(e.getSource()) + (paginaAtual - 1) * maxAnots;
+                if (index >= 0 && index < bloco.getLista().size()) {
+                    Anotacao anotacao = this.bloco.getLista().get(index);
+                    VerAnotacao verAnotacao = new VerAnotacao(anotacao, bloco, this);
+                }
             }
         }
         
-        if (e.getSource() == remAnot) {
-            int index = remAnotBotoes.indexOf(e.getSource()) + (paginaAtual - 1) * maxAnots;
-            if (index >= 0 && index < bloco.getLista().size()) {
-                Anotacao anotacao = this.bloco.getLista().get(index);
-                bloco.remover(anotacao);
-                verAnotBotoes.remove(index);
-                atualizaAnot();
+        for (int i = 0; i < remAnotBotoes.size(); i++) {
+            if (e.getSource() == remAnotBotoes.get(i)) {
+                int index = remAnotBotoes.indexOf(e.getSource()) + (paginaAtual - 1) * maxAnots;
+                if (index >= 0 && index < bloco.getLista().size()) {
+                    Anotacao anotacao = this.bloco.getLista().get(index);
+                    bloco.remover(anotacao);
+                    verAnotBotoes.remove(index);
+                    atualizaAnot();
+                }
             }
         }
     }

@@ -7,10 +7,8 @@ package anotacoesapp;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -65,7 +63,6 @@ public class VerAnotacao extends JFrame implements ActionListener {
         dataDeCriacao.setText(data.getDia() + "/" + data.getMes() + "/" + data.getAno());
 
         // -- Definição do Painel 2 --------------
-        
         texto = new JPanel();
         painel2.setLayout(new BorderLayout(0, 10));
         painel2.add(texto);
@@ -79,7 +76,7 @@ public class VerAnotacao extends JFrame implements ActionListener {
         descricao.setEditable(true);
         descricao.setLineWrap(true);
         descricao.setPreferredSize(new Dimension(410, 250));
-        texto.add(new JScrollPane(descricao), BorderLayout.CENTER);
+        texto.add(new JScrollPane(descricao));
         descricao.setText(anotacao.getDescricao());
 
         // -- Definição do Painel 3 --------------
